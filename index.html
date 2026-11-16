@@ -364,5 +364,14 @@
     
   });
 </script>
+<!-- 築目眼鏡專屬：4.8秒溫和暖金晨光掃過特效（不影響點擊） -->
+<style>
+  .warm-sweep-layer { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; overflow: hidden; }
+  .warm-sun { position: absolute; top: -100px; left: -100px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(255,251,235,0.95) 0%, rgba(217,160,91,0.38) 45%, transparent 75%); opacity: 0; animation: warmSunAnim 4.8s ease-in-out 1 forwards; }
+  .warm-beam { position: absolute; top: 0; left: 0; width: 170vmax; height: 280px; background: linear-gradient(180deg, transparent 0%, rgba(217, 160, 91, 0.14) 25%, rgba(255, 248, 225, 0.55) 50%, rgba(176, 137, 104, 0.14) 75%, transparent 100%); filter: blur(24px); transform-origin: center center; opacity: 0; animation: warmBeamAnim 4.8s cubic-bezier(0.25, 0.1, 0.25, 1) 1 forwards; }
+  @keyframes warmSunAnim { 0% { opacity: 0; transform: scale(0.75); } 30% { opacity: 0.9; transform: scale(1.04); } 75% { opacity: 0.45; transform: scale(1); } 100% { opacity: 0; transform: scale(0.85); } }
+  @keyframes warmBeamAnim { 0% { opacity: 0; transform: translate(-60vmax, -60vmax) rotate(-45deg); } 25% { opacity: 0.9; } 78% { opacity: 0.65; } 100% { opacity: 0; transform: translate(38vmax, 38vmax) rotate(-45deg); } }
+</style>
+<div class="warm-sweep-layer"><div class="warm-sun"></div><div class="warm-beam"></div></div>
 </body>
 </html>
