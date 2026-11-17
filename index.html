@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -53,68 +53,6 @@
   .fg input, .fg textarea, select { width: 100%; background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 10px; border-radius: 8px; }
   footer { background: #f1ede4; border-top: 1px solid var(--border); padding: 32px 5%; text-align: center; color: var(--muted); font-size: 0.86rem; margin-top: 60px; }
 </style>
-<style>
-@media (max-width: 768px), (hover: none) and (pointer: coarse) {
-  .magnifier-glass, .zoom-lens, #zoomLens, [class*="magnif"], [class*="lens"] {
-    display: none !important;
-    pointer-events: none !important;
-  }
-  .product-detail-img, .detail-img-box, .zoom-container, [class*="detail-img"] {
-    touch-action: pan-y pinch-zoom !important;
-    cursor: pointer !important;
-  }
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.innerWidth <= 768 || window.matchMedia("(pointer: coarse)").matches) {
-    document.querySelectorAll("*").forEach(function(el) {
-      if (el.children.length === 0 && el.textContent.includes("將滑鼠移至左側鏡框照片上即可")) {
-        el.innerHTML = "💡 <strong>細節檢視提示：</strong> 輕點上方鏡框照片即可開啟<strong>全螢幕原圖</strong>，支援雙指自由縮放檢視鼻墊與鉸鏈細節！";
-      }
-    });
-  }
-});
-</script>
-<style>
-@media (max-width: 900px), (hover: none) {
-  * { touch-action: manipulation; }
-  body, html { overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; }
-  img { touch-action: pan-y pinch-zoom !important; }
-}
-</style>
-<style>
-@media (max-width: 900px), (hover: none) and (pointer: coarse) {
-  #zoomBox, .zoom-wrap {
-    touch-action: pan-y pinch-zoom !important;
-    overflow: visible !important;
-  }
-  #zoomBox img, #dtImg {
-    transform: none !important;
-    scale: 1 !important;
-    touch-action: pan-y pinch-zoom !important;
-  }
-  .zoom-icon {
-    pointer-events: none !important;
-  }
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.innerWidth <= 900 || window.matchMedia("(pointer: coarse)").matches) {
-    var box = document.getElementById("zoomBox");
-    if (box) {
-      box.removeAttribute("onmousemove");
-      box.removeAttribute("onmouseleave");
-    }
-    document.querySelectorAll("div").forEach(function(el) {
-      if (el.innerHTML.includes("將滑鼠移至左側鏡框照片上即可") && el.children.length <= 3) {
-        el.innerHTML = "💡 <strong>細節檢視提示：</strong>輕點上方鏡框照片即可開啟<strong>全螢幕原圖</strong>，支援雙指自由縮放檢視細節！";
-      }
-    });
-  }
-});
-</script>
 </head>
 <body><header>
   <div class="logo">築目眼鏡 <span>JHUMU OPTICAL</span></div>
@@ -360,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function() {
     go('detail', null);
   }
 
-  function zoomMove(e) { if (window.innerWidth <= 900 || window.matchMedia("(pointer: coarse)").matches) return;
+  function zoomMove(e) {
     const box = document.getElementById('zoomBox');
     const img = document.getElementById('dtImg');
     const rect = box.getBoundingClientRect();
@@ -437,5 +375,3 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="warm-sweep-layer"><div class="warm-sun"></div><div class="warm-beam"></div></div>
 </body>
 </html>
-
-
