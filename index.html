@@ -76,6 +76,13 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 </script>
+<style>
+@media (max-width: 900px), (hover: none) {
+  * { touch-action: manipulation; }
+  body, html { overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; }
+  img { touch-action: pan-y pinch-zoom !important; }
+}
+</style>
 </head>
 <body><header>
   <div class="logo">築目眼鏡 <span>JHUMU OPTICAL</span></div>
@@ -398,3 +405,4 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="warm-sweep-layer"><div class="warm-sun"></div><div class="warm-beam"></div></div>
 </body>
 </html>
+
