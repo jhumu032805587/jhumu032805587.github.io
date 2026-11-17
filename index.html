@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -353,10 +353,19 @@
     const m = document.getElementById('fMail').value.trim();
     const msg = document.getElementById('fMsg').value.trim();
     if (!n || !m) return alert('請填寫您的稱呼與聯絡方式（電話或 LINE ID）！');
-    const fullText = `【築目眼鏡 線上預約試戴】\n• 貴賓稱呼：${n}\n• 聯絡方式：${m}\n${msg}`;
-    navigator.clipboard.writeText(fullText).catch(() => {});
-    alert('✅ 已為您自動複製預約明細！\n\n接下來將為您開啟築目眼鏡 Facebook 粉專，請直接在私訊對話框中「貼上並送出」即可完成預約！');
-    window.open('https://www.facebook.com/JhumuOptical', '_blank');
+    fetch('https://9d6a34d292d801.app.lhr.life/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: n, phone: m, service_type: '築目眼鏡驗光預約', message: msg })
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert('✅ 預約已成功寫入門市資料庫！\n\n' + data.msg);
+      document.getElementById('fName').value = '';
+      document.getElementById('fMail').value = '';
+      document.getElementById('fMsg').value = '';
+    })
+    .catch(() => alert('無法連線至資料庫主機，請確認 192.168.0.32 後端已啟動！'));
   }
   document.addEventListener('DOMContentLoaded', () => {
     renderShop();
@@ -375,3 +384,8 @@
 <div class="warm-sweep-layer"><div class="warm-sun"></div><div class="warm-beam"></div></div>
 </body>
 </html>
+
+
+
+
+
