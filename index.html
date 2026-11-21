@@ -512,8 +512,30 @@
     }, { passive: true });
   });
 </script>
+<script id="jhumu-url-router">
+  const _origJhGo = window.go;
+  window.go = function(id, btn, push = true) {
+    if (typeof _origJhGo === 'function') _origJhGo(id, btn);
+    if (push) {
+      history.pushState({ view: id }, '', '#' + id);
+    }
+  };
+  window.addEventListener('popstate', function(e) {
+    const id = (e.state && e.state.view) || location.hash.replace('#', '') || 'home';
+    const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => (b.getAttribute('onclick') || '').includes("'" + id + "'"));
+    window.go(id, targetBtn, false);
+  });
+  window.addEventListener('DOMContentLoaded', function() {
+    const initId = location.hash.replace('#', '');
+    if (initId && document.getElementById('view-' + initId)) {
+      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => (b.getAttribute('onclick') || '').includes("'" + initId + "'"));
+      window.go(initId, targetBtn, false);
+    }
+  });
+</script>
 </body>
 </html>
+
 
 
 
