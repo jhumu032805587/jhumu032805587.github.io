@@ -53,6 +53,32 @@
   .fg input, .fg textarea, select { width: 100%; background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 10px; border-radius: 8px; }
   footer { background: #f1ede4; border-top: 1px solid var(--border); padding: 32px 5%; text-align: center; color: var(--muted); font-size: 0.86rem; margin-top: 60px; }
 </style>
+<style id="jhumu-pro-slider">
+  .hero { position: relative !important; height: 82vh !important; min-height: 500px !important; max-height: 780px !important; padding: 0 !important; text-align: left !important; overflow: hidden !important; background: #f7f4ee !important; border-bottom: 1px solid var(--border); }
+  .jh-slides { position: absolute; inset: 0; z-index: 0; }
+  .jh-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 2s ease-in-out; }
+  .jh-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1) translate(0, 0); transition: transform 8.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+  .jh-slide.active { opacity: 1; }
+  /* 第1、3張：慢速放大；第2張：慢速縮小並往左上方平移 */
+  .jh-slide:nth-child(odd).active img { transform: scale(1.13) translate(0, 0); }
+  .jh-slide:nth-child(even) img { transform: scale(1.15) translate(1.8%, 1.2%); }
+  .jh-slide:nth-child(even).active img { transform: scale(1.02) translate(-2.2%, -1.5%); }
+  /* 左霧右透漸層遮罩：左邊文字清晰好讀，右邊三張眼鏡色彩100%鮮豔透出 */
+  .jh-hero-mask { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(250,249,246,0.95) 0%, rgba(250,249,246,0.84) 36%, rgba(250,249,246,0.18) 64%, rgba(0,0,0,0.03) 100%); }
+  /* 完全仿動物醫院「左側垂直線＋大標語」結構 */
+  .jh-hero-inner { position: absolute; left: 8%; top: 50%; transform: translateY(-50%); z-index: 2; max-width: 560px; border-left: 3px solid var(--wood); padding: 8px 0 8px 24px; }
+  .jh-eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--gold); letter-spacing: 2.5px; margin-bottom: 10px; }
+  .jh-hero-inner h1 { font-size: clamp(1.85rem, 3vw, 2.65rem) !important; font-weight: 900; color: var(--wood); line-height: 1.38; margin: 0 0 14px 0 !important; }
+  .jh-hero-inner p { color: #524a44 !important; font-size: 0.98rem; line-height: 1.8; margin: 0 0 24px 0 !important; max-width: 500px !important; }
+  .jh-dots { position: absolute; left: 8%; bottom: 32px; z-index: 3; display: flex; gap: 10px; }
+  .jh-dot { width: 32px; height: 3px; background: rgba(92,64,51,0.25); border-radius: 2px; cursor: pointer; transition: 0.4s; }
+  .jh-dot.active { width: 52px; background: var(--wood); }
+  @media (max-width: 768px) {
+    .hero { height: 70vh !important; }
+    .jh-hero-mask { background: linear-gradient(180deg, rgba(250,249,246,0.92) 0%, rgba(250,249,246,0.78) 55%, rgba(250,249,246,0.25) 100%); }
+    .jh-hero-inner { left: 6%; right: 6%; top: 46%; }
+  }
+</style>
 </head>
 <body><header>
   <div class="logo">築目眼鏡 <span>JHUMU OPTICAL</span></div>
@@ -71,10 +97,23 @@
 
 <div id="view-home" class="view active">
   <section class="hero">
-    <div class="pill">國家合格驗光所 ｜ 日韓手工賽璐珞與純鈦鏡框專門店</div>
-    <h1><em>築目眼鏡</em> JHUMU OPTICAL<br>為您量身打造最貼合臉型的清晰視界</h1>
-    <p style="color:var(--muted);max-width:680px;margin:0 auto 26px;">嚴選日本手工賽璐珞（Celluloid）、內藤眼鏡（NAITO OPTICAL）與韓國 LASH 輕量純鈦鏡框，結合專業國家考試合格驗光師一對一視覺評估。</p>
-    <button class="btn-wood" onclick="go('shop', document.querySelectorAll('.tab-btn'))">瀏覽精選鏡框系列</button>
+    <div class="jh-slides">
+      <div class="jh-slide"><img src="14.jpg" alt="透灰雙樑純鈦複合鏡框"></div>
+      <div class="jh-slide"><img src="12.jpg" alt="日本手工賽璐珞經典方圓框"></div>
+      <div class="jh-slide"><img src="69.jpg" alt="日韓手工職人鏡框系列"></div>
+    </div>
+    <div class="jh-hero-mask"></div>
+    <div class="jh-hero-inner">
+      <div class="jh-eyebrow">國家合格驗光所 ｜ 日韓手工精品鏡框</div>
+      <h1><em>築目眼鏡</em> JHUMU OPTICAL<br>為您量身打造最貼合臉型的清晰視界</h1>
+      <p>嚴選日本手工賽璐珞、內藤眼鏡與韓國 LASH 輕量純鈦鏡框，結合專業國家考試合格驗光師一對一視覺評估。</p>
+      <button class="btn-wood" onclick="go('shop', document.querySelectorAll('.tab-btn'))">瀏覽精選鏡框系列 ➔</button>
+    </div>
+    <div class="jh-dots">
+      <span class="jh-dot active" data-idx="0"></span>
+      <span class="jh-dot" data-idx="1"></span>
+      <span class="jh-dot" data-idx="2"></span>
+    </div>
   </section>
   <div class="container">
     <h2 style="text-align:center;color:var(--wood);margin-bottom:8px;">匠心工藝與品牌嚴選</h2>
@@ -382,8 +421,34 @@
   @keyframes warmBeamAnim { 0% { opacity: 0; transform: translate(-60vmax, -60vmax) rotate(-45deg); } 25% { opacity: 0.95; } 78% { opacity: 0.7; } 100% { opacity: 0; transform: translate(38vmax, 38vmax) rotate(-45deg); } }
 </style>
 <div class="warm-sweep-layer"><div class="warm-sun"></div><div class="warm-beam"></div></div>
+<script id="jhumu-pro-slider-js">
+  (function(){
+    const slides = document.querySelectorAll('.jh-slide');
+    const dots = document.querySelectorAll('.jh-dot');
+    if(!slides.length) return;
+    let idx = 0;
+    setTimeout(() => { slides[0].classList.add('active'); }, 50);
+    function showSlide(n){
+      slides[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = (n + slides.length) % slides.length;
+      slides[idx].classList.add('active');
+      dots[idx].classList.add('active');
+    }
+    let timer = setInterval(() => showSlide(idx + 1), 7500);
+    dots.forEach(d => d.addEventListener('click', () => {
+      clearInterval(timer);
+      showSlide(parseInt(d.dataset.idx));
+      timer = setInterval(() => showSlide(idx + 1), 7500);
+    }));
+  })();
+</script>
 </body>
 </html>
+
+
+
+
 
 
 
