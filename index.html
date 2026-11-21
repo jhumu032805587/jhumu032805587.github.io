@@ -41,7 +41,7 @@
   .zoom-wrap { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); cursor: zoom-in; height: 390px; background: #fff; }
   .zoom-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.15s ease-out; }
   .zoom-icon { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.9); color: var(--wood); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15); pointer-events: none; }
-  .modal { display: none; position: fixed; inset: 0; background: rgba(43,38,35,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+  .modal { display: none; position: fixed; inset: 0; background: rgba(43,38,35,0.88); z-index: 300; align-items: center; justify-content: center; padding: 20px; }
   .modal.open { display: flex; }
   .modal img { max-width: 95vw; max-height: 90vh; border-radius: 10px; background: #fff; }
   .drawer-bg { display: none; position: fixed; inset: 0; background: rgba(43,38,35,0.55); z-index: 999; justify-content: flex-end; }
@@ -485,13 +485,7 @@
     }));
   })();
 </script>
-<a href="https://google.com" 
-   target="_blank" 
-   rel="noopener" 
-   class="floating-google-review">
-  <span class="star">★</span>
-  <span>Google 評論 (5.0)</span>
-</a>
+
 
 
 
@@ -508,7 +502,7 @@
       clearTimeout(popTimer);
       popTimer = setTimeout(() => {
         btn.classList.add('show');
-      }, 3000);
+      }, 300);
     }, { passive: true });
   });
 </script>
@@ -533,8 +527,24 @@
     }
   });
 </script>
+<a href="https://google.com" target="_blank" rel="noopener" class="floating-google-review"><span class="star">★</span><span>Google 評論 (5.0)</span></a>
+<script id="sync-google-review-href">
+  window.addEventListener('DOMContentLoaded', function() {
+    const floatBtn = document.querySelector('.floating-google-review');
+    const footerMap = Array.from(document.querySelectorAll('footer a')).find(a => (a.textContent || '').includes('Google'));
+    if (floatBtn && footerMap && footerMap.href) {
+      floatBtn.href = footerMap.href;
+    }
+  });
+</script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
